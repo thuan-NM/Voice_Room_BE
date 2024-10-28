@@ -2,12 +2,14 @@ const Room = require('../models/Room');
 
 // Tạo phòng
 exports.createRoom = async(req, res) => {
-    const { name } = req.body;
+    const { name, userkey, companykey } = req.body; // Thêm userkey và companykey vào
     try {
-        const room = new Room({ name });
+        // Tạo mới một phòng với các trường cần thiết
+        const room = new Room({ name, userkey, companykey });
         await room.save();
         res.status(201).json(room);
     } catch (error) {
+        console.error(error); // Ghi log lỗi để dễ dàng theo dõi
         res.status(500).json({ message: 'Lỗi tạo phòng' });
     }
 };
@@ -24,6 +26,7 @@ exports.joinRoom = async(req, res) => {
         await room.save();
         res.status(200).json(room);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Lỗi tham gia phòng' });
     }
 };
@@ -40,6 +43,7 @@ exports.leaveRoom = async(req, res) => {
         await room.save();
         res.status(200).json(room);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Lỗi rời phòng' });
     }
 };
@@ -53,6 +57,7 @@ exports.getRoom = async(req, res) => {
 
         res.status(200).json(room);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Lỗi lấy thông tin phòng' });
     }
 };
