@@ -88,9 +88,9 @@ function setupSocket(server) {
                 socket.emit('userInfo', { userInfo, userType, username });
 
                 // Gửi danh sách người dùng trong phòng
-                const usersInRoom = [...io.sockets.adapter.rooms.get(roomId) || []].filter(id => id !== socket.id);
+                const usersInRoom = [...io.sockets.adapter.rooms.get(roomId) || []];
 
-                const usersInfo = usersInRoom.map(id => {
+                const usersInfo = usersInRoom.map((id) => {
                     return { socketId: id, username: users[id] };
                 });
 

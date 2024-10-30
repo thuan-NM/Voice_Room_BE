@@ -49,13 +49,20 @@ exports.leaveRoom = async(req, res) => {
 };
 
 // Lấy thông tin phòng
+// Lấy thông tin phòng
+// Lấy thông tin phòng
 exports.getRoom = async(req, res) => {
     const { roomId } = req.params;
     try {
-        const room = await Room.findById(roomId);
+        const room = await Room.findOne({ name: roomId });
         if (!room) return res.status(404).json({ message: 'Phòng không tồn tại' });
 
-        res.status(200).json(room);
+        res.status(200).json({
+            name: room.name,
+            userkey: room.userkey,
+            companykey: room.companykey,
+            participants: room.participants, // Chỉ trả về danh sách username
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Lỗi lấy thông tin phòng' });
