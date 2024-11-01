@@ -7,6 +7,7 @@ const User = require('../models/User');
 const Company = require('../models/Company');
 dotenv.config();
 
+const uri = process.env.MONGODB_URI;
 
 const db = {
     Room,
@@ -17,7 +18,7 @@ const db = {
 async function connectDb() {
     try {
         console.log("Connect to database successfully!!");
-        await mongoose.connect(process.env.MONGODB_URI, {
+        await mongoose.connect(uri, {
             // useNewUrlParser: true,
             // useUnifiedTopology: true,
         });
