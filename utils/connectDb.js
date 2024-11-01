@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const dotenv = require('dotenv');
 
 // Import các Model
 const Room = require('../models/Room');
 const User = require('../models/User');
 const Company = require('../models/Company');
+dotenv.config();
 
 
 const db = {
