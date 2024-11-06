@@ -192,6 +192,13 @@ function setupSocket(server) {
                 console.error('Error handling disconnect:', error);
             }
         });
+        socket.on('startScreenShare', ({ roomId }) => {
+            socket.to(roomId).emit('userScreenShare', { socketId: socket.id });
+        });
+
+        socket.on('stopScreenShare', ({ roomId }) => {
+            socket.to(roomId).emit('userStopScreenShare', { socketId: socket.id });
+        })
     });
 }
 
