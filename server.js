@@ -9,7 +9,10 @@ const { connectDb } = require('./utils/connectDb');
 dotenv.config();
 
 const app = express();
-app.use(cors()); // Cho phép kết nối từ client
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 app.use(express.json()); // Parse JSON cho request
 
 // Tạo server HTTP từ ứng dụng Express
